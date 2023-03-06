@@ -1,1 +1,2 @@
 numpy==1.19.5
+dask[complete]==2021.3.0
