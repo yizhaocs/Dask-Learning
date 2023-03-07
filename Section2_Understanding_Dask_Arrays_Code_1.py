@@ -5,7 +5,6 @@ import dask.array as da
 Dask Arrays Interface is similar to Numpy API
 '''
 np_arr = np.random.randint(20, size=20)
-# np_arr: [16 14  8  9  5  9  6 12 13  1 15 19  8  5  5  8 12  7  9 13]
 print(f"np_arr: {np_arr}")
 
 '''
@@ -33,6 +32,16 @@ dask_arr_from_np = da.from_array(np_arr, chunks=5)
 print(f"dask_arr_from_np: {dask_arr_from_np}")
 print(f"dask_arr_from_np.compute(): {dask_arr_from_np.compute()}")
 
-'''
-Dask translates your array operations into a graph to
-'''
+# '''
+# Dask translates your array operations into a graph to
+# '''
+# dask_arr_from_np.sum().visualize()
+# dask_arr_from_np.sum().visualize(rankdir="LR")
+#
+# dask_arr_mean = da.mean(dask_arr_from_np)
+# dask_arr_mean.compute()
+#
+# '''
+# Another Example
+# '''
+# x = da.random.random(10, chunks=2)
