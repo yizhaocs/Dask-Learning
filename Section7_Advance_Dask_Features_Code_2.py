@@ -52,4 +52,4 @@ print(f'all_res:{all_res}')
 We can also use map function to pass multiple future object
 '''
 list_result = client.map(some_func_long, range(5))
-client.gather(list.result)
+print(f'client.gather(list_result):{client.gather(list_result)}')
