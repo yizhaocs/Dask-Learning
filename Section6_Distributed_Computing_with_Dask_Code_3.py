@@ -21,3 +21,6 @@ print(f"dummy_df.head():{dummy_df.head()}")
 print(f"dummy_df.head():{dummy_df.head()}")
 max_gdp_per_country = dummy_df.groupby('PublicationYear').count()
 print(f"max_gdp_per_country.compute():{max_gdp_per_country.compute()}")
+
+
+dummpy_df.nlargest(5, 'ItemCount').compute()
