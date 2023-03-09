@@ -22,7 +22,7 @@ param_grid = {
 }
 
 clf = SVC(random_state=0, probability=True)
-grid_search = GridSearchCV(clf, param_grid=param_grid, cv=3, n_jobs=-1)
+grid_search = GridSearchCV(clf, param_grid=param_grid, cv=3, n_jobs=1)
 
 '''
 不用dask-ml来tune sklearn
@@ -34,6 +34,7 @@ grid_search.fit(X, y)
 
 end_time = time.perf_counter()
 
+# Execution time: 47.798580993985524 seconds
 print("Execution time:", end_time - start_time, "seconds")
 
 
@@ -48,6 +49,7 @@ with joblib.parallel_backend('dask'):
 
 end_time = time.perf_counter()
 
+# Execution time: 12.109803343002568 seconds
 print("Execution time:", end_time - start_time, "seconds")
 
 print(f"grid_search.predict(X)[:10]:{grid_search.predict(X)[:10]}")
