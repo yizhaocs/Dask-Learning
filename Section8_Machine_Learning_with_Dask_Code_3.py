@@ -3,6 +3,8 @@ Using Dask-ML for Hyper-Parameter Tuning
 '''
 from dask.distributed import Client, progress
 
+# If you want to run workers in your same process, you can pass the processes=False keyword argument.
+# client = Client(processes=True)
 client = Client(processes=False, threads_per_worker=4, n_workers=3, memory_limit='2GB')
 print(f"client:{client}")
 
