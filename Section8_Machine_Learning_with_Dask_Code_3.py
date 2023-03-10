@@ -1,12 +1,23 @@
 '''
 Using Dask-ML for Hyper-Parameter Tuning
 '''
+from multiprocessing import freeze_support
+
 from dask.distributed import Client, progress
 
 # If you want to run workers in your same process, you can pass the processes=False keyword argument.
 # client = Client(processes=True)
-client = Client(processes=False, threads_per_worker=4, n_workers=3, memory_limit='2GB')
-print(f"client:{client}")
+try:
+    # client = Client(processes=False)
+    client = Client(processes=False, timeout='2s', memory_limit='2GB')
+    # client = Client(processes=False, threads_per_worker=4, n_workers=3, memory_limit='2GB')
+    print(f"client:{client}")
+except TimeoutError:
+    print('TimeoutError')
+    # There is no standard convention to check if a scheduler exists on your machine.
+    # The best you can do is try with a short timeout. The default port is 8786
+    pass
+
 
 from sklearn.svm import SVC
 from sklearn.datasets import make_classification
@@ -55,3 +66,4 @@ end_time = time.perf_counter()
 print("Execution time:", end_time - start_time, "seconds")
 
 print(f"grid_search.predict(X)[:10]:{grid_search.predict(X)[:10]}")
+client.shutdown()
