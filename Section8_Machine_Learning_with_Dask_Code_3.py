@@ -5,9 +5,10 @@ from multiprocessing import freeze_support
 
 from dask.distributed import Client, progress
 
-# If you want to run workers in your same process, you can pass the processes=False keyword argument.
-# client = Client(processes=True)
 try:
+    '''
+        If you want to run workers in your same process, you can pass the processes=False keyword argument.
+    '''
     # client = Client(processes=False)
     client = Client(processes=False, timeout='2s', memory_limit='2GB')
     # client = Client(processes=False, threads_per_worker=4, n_workers=3, memory_limit='2GB')
