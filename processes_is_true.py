@@ -21,3 +21,4 @@ x = da.random.random((300, 300), chunks=(10, 10))
 y = x + x.T
 z = (y.mean(axis=1) / y.shape[0]).std()
 print(z.compute())
+client.close()
