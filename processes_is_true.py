@@ -6,19 +6,21 @@ from dask.distributed import Client, LocalCluster
 import dask.array as da
 import dask
 import os
-dask.config.set({
-    'temporary_directory': os.path.expanduser('~/tmp'),
-    'scheduler.work-stealing': True
-})
-cluster = LocalCluster(
-    n_workers=3,
-    threads_per_worker=1,
-    processes=True,
-    diagnostics_port=None,
-)
-client = Client(cluster)
-x = da.random.random((300, 300), chunks=(10, 10))
-y = x + x.T
-z = (y.mean(axis=1) / y.shape[0]).std()
-print(z.compute())
-client.close()
+
+if __name__ == '__main__':
+    # dask.config.set({
+    #     'temporary_directory': os.path.expanduser('~/tmp'),
+    #     'scheduler.work-stealing': True
+    # })
+    cluster = LocalCluster(
+        n_workers=3,
+        threads_per_worker=1,
+        processes=True,
+        # diagnostics_port=None,
+    )
+    client = Client(cluster)
+    x = da.random.random((300, 300), chunks=(10, 10))
+    y = x + x.T
+    z = (y.mean(axis=1) / y.shape[0]).std()
+    print(z.compute())
+    client.close()
