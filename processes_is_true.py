@@ -4,7 +4,12 @@ https://cocalc.com/share/public_paths/6047eba56ed510d3f13ec86819558896e39decef
 '''
 from dask.distributed import Client, LocalCluster
 import dask.array as da
-
+import dask
+import os
+dask.config.set({
+    'temporary_directory': os.path.expanduser('~/tmp'),
+    'scheduler.work-stealing': True
+})
 cluster = LocalCluster(
     n_workers=3,
     threads_per_worker=1,
