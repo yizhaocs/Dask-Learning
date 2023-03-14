@@ -13,7 +13,10 @@ if __name__ == '__main__':
     #     'scheduler.work-stealing': True
     # })
     cluster = LocalCluster(
+        n_workers=3,
+        threads_per_worker=1,
         processes=True,
+        # diagnostics_port=None,
     )
     client = Client(cluster)
     print(f"client:{client}")
